@@ -127,12 +127,7 @@ def prepare(tag):
     collect_binaries(Path("dist"), destination, expected)
     (destination / "release-notes.md").write_text(
         f"[Gate {tag}](https://github.com/{UPSTREAM}/releases/tag/{tag}) "
-        "with SimpleCloud's Connection plugin built in.\n\n"
-        "Binary names, platforms, and version match the upstream Gate release. "
-        "Verify downloads using `checksums.txt`.\n\n"
-        "Copy your version 2 connection configs into `simplecloud-connection/`. "
-        "See the [configuration guide](https://github.com/simplecloudapp/"
-        f"simplecloud-gate/blob/{tag}/docs/configuration.md) for setup and compatibility.\n"
+        "with SimpleCloud's Connection plugin built in.\n"
     )
 
 

@@ -21,30 +21,19 @@
 </div>
 <br>
 
-> Read the [configuration guide][docs-thisproject] for setup and compatibility with existing proxy configs.
-
 SimpleCloud Gate is [Minekube Gate][gate] with SimpleCloud plugins built in.
-It currently includes the Connection plugin for server registration, player
-routing, and fallback connections.
 
 ## Features
 
-- [x] **Server registration**: Discover available SimpleCloud game servers and follow server lifecycle events.
-- [x] **Existing configs**: Load the original Connection plugin's version 2 config files, including hyphenated field names.
-- [x] **Connection routing**: Select servers through matchers, permissions, environment rules, and virtual-host routes.
-- [x] **Join and fallback targets**: Route players by priority and optional source restrictions.
-- [x] **Navigation commands**: Configure commands such as `/lobby`, their aliases, permissions, and targets.
-- [x] **Messages**: Customize messages with variables, colors, text styles, and line breaks.
-- [x] **Gate updates**: Check stable Gate releases daily through Depot CI, test updates, and publish matching binary versions.
+- [x] Automatic SimpleCloud server registration
+- [x] Player routing, join targets, and kick fallbacks
+- [x] Configurable commands such as `/lobby`
+- [x] Support for existing Connection plugin v2 configs
 
 ## Installation
 
-Download the binary for your platform from [GitHub Releases][releases]. Files use
-Gate's naming scheme: `gate_<version>_<os>_<arch>`, with `.exe` on Windows and
-`_musl` for Linux musl builds. Each release includes `checksums.txt`.
-
-On Linux or macOS, make the downloaded binary executable and start it with your
-SimpleCloud network settings:
+Download the binary for your platform from [GitHub Releases][releases].
+On Linux or macOS, make it executable and start it with your network settings:
 
 ```sh
 chmod +x gate_0.74.9_linux_amd64
@@ -53,27 +42,17 @@ export SIMPLECLOUD_NETWORK_SECRET="your-network-secret"
 ./gate_0.74.9_linux_amd64
 ```
 
-Use the filename for your platform. The plugin creates its three configuration
-files in `simplecloud-connection/` on first startup. Copy existing version 2
-`config.yml`, `commands.yml`, and `messages.yml` there to reuse them. Gate's own
-proxy settings belong in the separate root `config.yml`.
+Use the filename for your platform. Configuration files are created in
+`simplecloud-connection/` on first startup. By default, joins, `/lobby`, and
+fallbacks use servers whose names start with `lobby`.
 
-The default connection routes joins, `/lobby`, and kick fallbacks to registered
-servers whose names begin with `lobby`. See the [configuration guide][docs-thisproject]
-for API settings, custom routes, reload behavior, and remaining MiniMessage and
-Java-regex compatibility limits.
+See the [configuration guide][docs-thisproject] for settings and compatibility.
 
 ## Releases
 
-Release tags follow the bundled Gate version, for example `v0.74.9`. The binaries
-use the same names and platform matrix as that upstream release, with our plugins
-registered by this repository's entry point.
-
-[Depot CI][depot] runs tests and cross-compiles the binaries. A daily workflow at
-04:17 UTC checks for a newer stable Gate release, updates the dependency and
-upstream GoReleaser configuration, validates the build, then pushes the update
-and matching tag. Releases are published only after uploaded checksums are
-verified. See [release maintenance](docs/releases.md) for manual runs and setup.
+[Depot CI][depot] checks for Gate updates daily. Releases use the same versions,
+binary names, and platforms as Gate, with SimpleCloud plugins included.
+See [release maintenance](docs/releases.md) for workflow setup and manual runs.
 
 ## Contributing
 
