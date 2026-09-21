@@ -48,6 +48,30 @@ fallbacks use servers whose names start with `lobby`.
 
 See the [configuration guide][docs-thisproject] for settings and compatibility.
 
+## Using your own plugins
+
+In your Gate project, add our Connection plugin as a dependency:
+
+```sh
+go get github.com/simplecloudapp/simplecloud-gate@v0.74.9
+```
+
+Import it in your entry point:
+
+```go
+import connection "github.com/simplecloudapp/simplecloud-gate/plugins/connection-plugin"
+```
+
+Register it alongside your own `proxy.Plugin` before starting Gate:
+
+```go
+proxy.Plugins = append(proxy.Plugins, connection.Plugin, myPlugin)
+gate.Execute()
+```
+
+Replace `myPlugin` with your plugin, then build with `go build .`. Plugins are
+compiled into the binary. Our configuration stays in `simplecloud-connection/`.
+
 ## Releases
 
 [Depot CI][depot] checks for Gate updates daily. Releases use the same versions,
