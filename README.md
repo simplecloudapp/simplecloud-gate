@@ -1,120 +1,120 @@
-<a name="readme-top"></a>
+# SimpleCloud Gate
 
-<!--
-*** Thanks for checking out the Gate Plugin Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
+![Banner][banner]
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![License][license-shield]][license-url]
-
-<br />
 <div align="center">
-  <a href="https://github.com/minekube/gate-plugin-template">
-    <img src="https://raw.githubusercontent.com/minekube/gate-plugin-template/main/assets/hero.png" alt="Logo" width="128" height="128">
-  </a>
 
-<h3 align="center">Gate Starter Plugin Template</h3>
+[![Release][badge-release]][releases]
+[![License][badge-license]][license]
+<br>
 
-  <p align="center">
-    An awesome template for creating your Minecraft proxy powered by Minekube Gate!
-    <br />
-    <br />
-    <a href="https://gate.minekube.com/developers/"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://minekube.com/discord">Discord</a>
-    ·
-    <a href="https://github.com/minekube/gate/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/minekube/gate/issues">Request Feature</a>
-  </p>
+[![Discord][badge-discord]][social-discord]
+[![Follow @simplecloudapp][badge-x]][social-x]
+[![Follow @simplecloudapp][badge-bluesky]][social-bluesky]
+[![Follow @simplecloudapp][badge-youtube]][social-youtube]
+<br>
+
+[Report a Bug][issue-bug-report]
+·
+[Request a Feature][issue-feature-request]
+
 </div>
+<br>
 
-## About The Project
+> Read the [configuration guide][docs-thisproject] for setup and compatibility with existing proxy configs.
 
-[![Product Name Screen Shot][product-screenshot]](https://gate.minekube.com)
+SimpleCloud Gate is [Minekube Gate][gate] with SimpleCloud plugins built in.
+It currently includes the Connection plugin for server registration, player
+routing, and fallback connections.
 
-This template repository bootstraps your [Minekube Gate](https://github.com/minekube/gate) project, a customizable
-Minecraft proxy written in Go.
+## Features
 
-## What's Included?
+- [x] **Server registration**: Discover available SimpleCloud game servers and follow server lifecycle events.
+- [x] **Existing configs**: Load the original Connection plugin's version 2 config files, including hyphenated field names.
+- [x] **Connection routing**: Select servers through matchers, permissions, environment rules, and virtual-host routes.
+- [x] **Join and fallback targets**: Route players by priority and optional source restrictions.
+- [x] **Navigation commands**: Configure commands such as `/lobby`, their aliases, permissions, and targets.
+- [x] **Messages**: Customize messages with variables, colors, text styles, and line breaks.
+- [x] **Gate updates**: Check stable Gate releases daily through Depot CI, test updates, and publish matching binary versions.
 
-- `gate.go`: The main entry point of the application.
-- `plugins`: The directory for your custom plugins.
-- `config.yml`: A minimal Gate configuration file.
-- `Dockerfile`: A Dockerfile for building a Docker image.
-- `.github/workflows`: GitHub Action for testing, linting, releasing on tags and publishing Docker images to ghcr.io.
-- `Makefile`: Contains commands for testing and linting.
-- `renovate.json`: Configuration file for Renovate automatic dependency updates.
+## Installation
 
-<details>
-<summary><strong>Prerequisites</strong></summary>
+Download the binary for your platform from [GitHub Releases][releases]. Files use
+Gate's naming scheme: `gate_<version>_<os>_<arch>`, with `.exe` on Windows and
+`_musl` for Linux musl builds. Each release includes `checksums.txt`.
 
-## Prerequisites
+On Linux or macOS, make the downloaded binary executable and start it with your
+SimpleCloud network settings:
 
-- [Go](https://golang.org/doc/install) - The Go Programming Language
-- [Git](https://git-scm.com/downloads) - Distributed Version Control System
-- [GoLand](https://www.jetbrains.com/go/) / [VSCode](https://code.visualstudio.com/) - Gophers' favorite IDEs
+```sh
+chmod +x gate_0.74.9_linux_amd64
+export SIMPLECLOUD_NETWORK_ID="your-network-id"
+export SIMPLECLOUD_NETWORK_SECRET="your-network-secret"
+./gate_0.74.9_linux_amd64
+```
 
-</details>
+Use the filename for your platform. The plugin creates its three configuration
+files in `simplecloud-connection/` on first startup. Copy existing version 2
+`config.yml`, `commands.yml`, and `messages.yml` there to reuse them. Gate's own
+proxy settings belong in the separate root `config.yml`.
 
-## Getting Started
+The default connection routes joins, `/lobby`, and kick fallbacks to registered
+servers whose names begin with `lobby`. See the [configuration guide][docs-thisproject]
+for API settings, custom routes, reload behavior, and remaining MiniMessage and
+Java-regex compatibility limits.
 
-1. Fork this repository on GitHub.
-2. Clone forked repository (`git clone <your-forked-repo-url>`)
-3. Open project in your favorite Go IDE.
-4. Run the proxy: `go run .`
-5. Start customizing Gate to your needs!
+## Releases
 
-## Usage
+Release tags follow the bundled Gate version, for example `v0.74.9`. The binaries
+use the same names and platform matrix as that upstream release, with our plugins
+registered by this repository's entry point.
 
-To create a new Gate plugin, follow these steps:
-
-1. Create and write your plugin code in a new `plugins/xyz/xyz.go` file.
-2. Add your exported plugin to the `proxy.Plugins` slice in `gate.go`.
-3. Build and run Gate with: `go run .`
-
-Use the `-d` flag to run Gate in debug mode if you encounter issues. (`go run . -d`)
+[Depot CI][depot] runs tests and cross-compiles the binaries. A daily workflow at
+04:17 UTC checks for a newer stable Gate release, updates the dependency and
+upstream GoReleaser configuration, validates the build, then pushes the update
+and matching tag. Releases are published only after uploaded checksums are
+verified. See [release maintenance](docs/releases.md) for manual runs and setup.
 
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any
-contributions you make are **greatly appreciated**.
+Read our [Contribution Guide][docs-contribute] before contributing.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feat/AmazingFeature`)
-5. Open a Pull Request on GitHub
+```sh
+git clone https://github.com/simplecloudapp/simplecloud-gate.git
+cd simplecloud-gate
+go build ./...
+go test ./...
+go vet ./...
+python3 -m unittest discover -s scripts -p '*_test.py'
+```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+Use the Go version declared in `go.mod` or newer. Each SimpleCloud plugin has its
+own folder under `plugins/`, starting with `plugins/connection-plugin`.
 
+## License
 
-[contributors-shield]: https://img.shields.io/github/contributors/minekube/gate.svg?style=for-the-badge
+This repository is licensed under the [MIT License][license].
 
-[contributors-url]: https://github.com/minekube/gate/graphs/contributors
+<!-- LINK GROUP -->
 
-[forks-shield]: https://img.shields.io/github/forks/minekube/gate-plugin-template.svg?style=for-the-badge
+[banner]: https://raw.githubusercontent.com/simplecloudapp/branding/main/readme/banner/simplecloudapp.png
+[gate]: https://github.com/minekube/gate
+[depot]: https://depot.dev/docs/ci/overview
+[releases]: https://github.com/simplecloudapp/simplecloud-gate/releases
+[issue-bug-report]: https://github.com/simplecloudapp/simplecloud-gate/issues/new?labels=bug
+[issue-feature-request]: https://github.com/simplecloudapp/simplecloud-gate/issues/new?labels=enhancement
+[docs-thisproject]: docs/configuration.md
+[docs-contribute]: https://docs.simplecloud.app/contribute
+[license]: ./LICENSE
 
-[forks-url]: https://github.com/minekube/gate-plugin-template/network/members
+[social-x]: https://x.com/simplecloudapp
+[social-bluesky]: https://bsky.app/profile/simplecloud.app
+[social-youtube]: https://www.youtube.com/@thesimplecloud9075
+[social-discord]: https://discord.simplecloud.app
 
-[stars-shield]: https://img.shields.io/github/stars/minekube/gate.svg?style=for-the-badge
-
-[stars-url]: https://github.com/minekube/gate-plugin-template/stargazers
-
-[issues-shield]: https://img.shields.io/github/issues/minekube/gate.svg?style=for-the-badge
-
-[issues-url]: https://github.com/minekube/gate-plugin-template/issues
-
-[license-shield]: https://img.shields.io/github/license/minekube/gate.svg?style=for-the-badge
-
-[license-url]: https://github.com/minekube/gate/blob/master/LICENSE
-
-[product-screenshot]: https://github.com/minekube/gate/raw/master/.web/docs/public/og-image.png
+[badge-release]: https://img.shields.io/github/v/release/simplecloudapp/simplecloud-gate?style=flat-square&color=0ea5e9
+[badge-license]: https://img.shields.io/badge/MIT-blue.svg?style=flat-square&label=license&labelColor=18181b&color=e11d48
+[badge-discord]: https://img.shields.io/badge/Community_Discord-d95652.svg?style=flat-square&logo=discord&color=27272a
+[badge-x]: https://img.shields.io/badge/Follow_@simplecloudapp-d95652.svg?style=flat-square&logo=x&color=27272a
+[badge-bluesky]: https://img.shields.io/badge/Follow_@simplecloud.app-d95652.svg?style=flat-square&logo=bluesky&color=27272a
+[badge-youtube]: https://img.shields.io/badge/youtube-d95652.svg?style=flat-square&logo=youtube&color=27272a

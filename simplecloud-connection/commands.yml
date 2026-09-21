@@ -1,0 +1,16 @@
+version: 2
+commands:
+  - name: lobby
+    aliases:
+      - l
+      - hub
+      - quit
+      - leave
+    permission: ""
+    messages:
+      already-connected: '<color:#dc2626>You are already connected to this lobby!'
+      no-target-connection-found: '<color:#dc2626>Couldn''t find a target server!'
+    target-connections:
+      - name: lobby
+        priority: 0
+        from: []

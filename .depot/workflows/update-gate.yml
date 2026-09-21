@@ -1,0 +1,62 @@
+name: Update Gate
+on:
+  schedule:
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: update-gate
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: depot-ubuntu-24.04-4
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+      - name: Resolve and update to the latest stable Gate release
+        id: update
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/gate_release.py update
+      - name: Validate updated dependency
+        if: steps.update.outputs.changed == 'true'
+        run: |
+          go vet ./...
+          go test -race ./...
+          go build ./...
+          python3 -m unittest discover -s scripts -p '*_test.py'
+      - name: Check all release platforms before pushing
+        if: steps.update.outputs.changed == 'true'
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          version: v2.18.2
+          args: release --snapshot --clean --skip=publish
+      - name: Commit the update and push the matching release tag
+        if: steps.update.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          RELEASE_TAG: ${{ steps.update.outputs.tag }}
+        run: |
+          set -euo pipefail
+          gh auth setup-git
+          git config user.name 'SimpleCloud Bot'
+          git config user.email 'bot@simplecloud.app'
+          git add go.mod go.sum .goreleaser.yml
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: update Gate to $RELEASE_TAG"
+          fi
+          # Never move an existing release tag. A concurrent main update causes
+          # the atomic push to fail, leaving both main and the tag unchanged.
+          git tag "$RELEASE_TAG"
+          git push --atomic origin HEAD:main "refs/tags/$RELEASE_TAG"

@@ -1,0 +1,27 @@
+version: 2
+registration:
+  enabled: true
+  server-name-pattern: <group>-<numerical_id>
+  persistent-server-name-pattern: <name>
+  ignore-server-groups-and-persistent-servers: []
+  additional-servers: []
+address:
+  routes: []
+connections:
+  - name: lobby
+    server-name-matcher:
+      operation: STARTS_WITH
+      value: lobby
+      negate: false
+    rules: []
+network-join-targets:
+  enabled: true
+  target-connections:
+    - name: lobby
+      priority: 0
+fallback:
+  enabled: true
+  target-connections:
+    - name: lobby
+      priority: 0
+      from: []

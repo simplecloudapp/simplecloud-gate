@@ -1,0 +1,11 @@
+version: 2
+variables:
+  prefix: '<color:#38bdf8><bold>⚡</bold></color>'
+kick:
+  no-fallback-servers: '<color:#dc2626>There is no fallback server available.'
+  no-target-connection: '<color:#dc2626>You have been disconnected from the network<br>because there are no fallback servers available.'
+command:
+  command-usage: '<prefix> <color:#ffffff>Usage: /connection reload'
+  config-reloading: '<prefix> <color:#ffffff>Reloading Connection configurations...'
+  config-reloaded-success: '<prefix> <color:#22c55e>Successfully reloaded all Connection configurations.'
+  config-reloaded-failed: '<prefix> <color:#dc2626>Failed to reload Connection configurations.'

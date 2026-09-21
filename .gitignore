@@ -1,0 +1,6 @@
+/gate
+/gate.exe
+/dist/
+/release/
+__pycache__/
+.DS_Store
