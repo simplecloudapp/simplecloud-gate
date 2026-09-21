@@ -60,6 +60,14 @@ An interrupted draft can be retried. An already published release cannot be
 overwritten by this workflow. The binaries include the Connection plugin;
 configuration files are created at startup and aren't added to the binary assets.
 
+To retry an existing release tag, use the full ref. Depot currently interprets
+a bare version such as `v0.74.9` as a branch name during manual dispatch:
+
+```sh
+depot ci dispatch --org 3nccvg6v98 --repo simplecloudapp/simplecloud-gate \
+  --workflow ci.yml --ref refs/tags/v0.74.9
+```
+
 To prepare a first release after testing:
 
 ```sh
