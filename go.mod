@@ -10,7 +10,7 @@ require (
 	github.com/simplecloudapp/cloud-api/go v0.0.0-20260808194630-51fc44220295
 	go.minekube.com/brigodier v0.0.2
 	go.minekube.com/common v0.4.0
-	go.minekube.com/gate v0.74.9
+	go.minekube.com/gate v0.74.11
 	gopkg.in/yaml.v3 v3.0.1
 )
 
@@ -75,7 +75,7 @@ require (
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
 	github.com/zyedidia/generic v1.2.1 // indirect
 	go.minekube.com/connect v0.6.3-0.20260803141147-8001cda93b1d // indirect
-	go.minekube.com/geyserlite v0.5.27 // indirect
+	go.minekube.com/geyserlite v0.5.29 // indirect
 	go.minekube.com/vialite v0.3.1 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/instrumentation/host v0.63.0 // indirect
