@@ -10,14 +10,14 @@ require (
 	github.com/simplecloudapp/cloud-api/go v0.0.0-20260808194630-51fc44220295
 	go.minekube.com/brigodier v0.0.2
 	go.minekube.com/common v0.4.0
-	go.minekube.com/gate v0.74.13
+	go.minekube.com/gate v0.74.16
 	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
 	buf.build/gen/go/minekube/connect/protocolbuffers/go v1.36.10-20240220124425-904ce30425c9.1 // indirect
 	connectrpc.com/connect v1.21.0 // indirect
-	connectrpc.com/otelconnect v0.9.0 // indirect
+	connectrpc.com/otelconnect v0.10.0 // indirect
 	github.com/Tnze/go-mc v1.20.2 // indirect
 	github.com/agext/levenshtein v1.2.3 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -76,7 +76,7 @@ require (
 	github.com/zyedidia/generic v1.2.1 // indirect
 	go.minekube.com/connect v0.6.3-0.20260803141147-8001cda93b1d // indirect
 	go.minekube.com/geyserlite v0.5.30 // indirect
-	go.minekube.com/vialite v0.3.2 // indirect
+	go.minekube.com/vialite v0.3.6 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/instrumentation/host v0.63.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.71.0 // indirect
