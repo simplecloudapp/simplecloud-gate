@@ -10,7 +10,7 @@ require (
 	github.com/simplecloudapp/cloud-api/go v0.0.0-20260808194630-51fc44220295
 	go.minekube.com/brigodier v0.0.2
 	go.minekube.com/common v0.4.0
-	go.minekube.com/gate v0.74.31
+	go.minekube.com/gate v0.74.32
 	gopkg.in/yaml.v3 v3.0.1
 )
 
