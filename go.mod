@@ -10,13 +10,13 @@ require (
 	github.com/simplecloudapp/cloud-api/go v0.0.0-20260808194630-51fc44220295
 	go.minekube.com/brigodier v0.0.2
 	go.minekube.com/common v0.4.0
-	go.minekube.com/gate v0.75.4
+	go.minekube.com/gate v0.75.6
 	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
 	buf.build/gen/go/minekube/connect/protocolbuffers/go v1.36.10-20240220124425-904ce30425c9.1 // indirect
-	connectrpc.com/connect v1.21.0 // indirect
+	connectrpc.com/connect v1.21.1 // indirect
 	connectrpc.com/connect/v2 v2.0.0 // indirect
 	connectrpc.com/otelconnect v0.12.0 // indirect
 	github.com/Tnze/go-mc v1.20.2 // indirect
