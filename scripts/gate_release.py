@@ -65,8 +65,10 @@ def update():
     config = base64.b64decode(source["content"], validate=False).decode()
     config = re.sub(r"(?m)^project_name:.*\n", "", config)
     Path(".goreleaser.yml").write_text("project_name: gate\n" + config)
-    subprocess.run(["go", "get", f"go.minekube.com/gate@{tag}"], check=True)
-    subprocess.run(["go", "mod", "tidy"], check=True)
+    # New Gate releases may require a newer Go; let go raise the go directive.
+    env = {**os.environ, "GOTOOLCHAIN": "auto"}
+    subprocess.run(["go", "get", f"go.minekube.com/gate@{tag}"], check=True, env=env)
+    subprocess.run(["go", "mod", "tidy"], check=True, env=env)
     output(changed="true", tag=tag)
 
 

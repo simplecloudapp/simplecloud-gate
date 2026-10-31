@@ -29,6 +29,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python3 scripts/gate_release.py update
+      - name: Set up the Go version required by the update
+        if: steps.update.outputs.changed == 'true'
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
       - name: Validate updated dependency
         if: steps.update.outputs.changed == 'true'
         run: |
